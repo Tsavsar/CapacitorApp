@@ -16,9 +16,40 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="./styles/style.css" />
-    <script type="module" src="./js/firebase.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.store("user", {
+          init() {
+            this.details = JSON.parse(localStorage.getItem("userdata")) || null;
+            this.selectedGym = null;
+          }
+        });
+      });
+    </script>
   </head>
-  <body>
+  <body
+    x-data="{
+      username: '',
+      password: '',
+      confirmPassword: '',
+      signup() {
+        const fieldsEmpty = !this.username.trim() && !this.password.trim() && !this.confirmPassword.trim();
+        if (fieldsEmpty) return;
+        if (this.password.trim() !== this.confirmPassword.trim()) return;
+    
+        const userData = {
+          username: this.username,
+          password: this.password
+        };
+        console.log({ userData });
+        localStorage.setItem('userdata', JSON.stringify(userData));                
+        const link = document.createElement('a');
+        (link.href = 'home.html');
+        (link.click());
+      }
+    }"
+  >
     <div class="logo2">
       <img src="./imgs/herologo.png" />
     </div>
@@ -26,22 +57,22 @@
     <div class="bottom-placement">
       <div class="container">
         <h2>Create account</h2>
-        <form action="home.html">
+        <form @submit.prevent>
           <div class="inputwrap">
             <label>Username</label>
-            <input class="details" type="" id="username" />
+            <input class="details" type="" id="username" x-model="username" />
           </div>
 
           <div class="inputwrap">
             <label>Password</label>
-            <input class="details" type="" id="Password" />
+            <input class="details" type="password" id="Password" x-model="password" />
           </div>
           <div class="inputwrap">
             <label>Confirm Password</label>
-            <input class="details" type="" id="Confirm-password" />
+            <input class="details" type="password" id="Confirm-password" x-model="confirmPassword" />
           </div>
 
-          <button class="submit">Sign Up</button>
+          <button class="submit" @click="signup">Sign Up</button>
         </form>
         <div>
           <a href="index.html">

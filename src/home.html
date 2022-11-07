@@ -16,15 +16,34 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="./styles/style2.css" />
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.store("user", {
+          init() {
+            this.details = JSON.parse(localStorage.getItem("userdata")) || null;
+            this.selectedGym = null;
+          },
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="containerhp">
       <div class="header1">
         <div class="">
-          <h5 class="blue">Hi, Tsavsar</h5>
+          <h5
+            class="blue"
+            x-data
+            x-text="'Hi, ' + $store.user.details.username"
+          ></h5>
           <p3 class="sub">Ready to get back to work?</p3>
 
           <!-- <div class="account" style="float: right">
+
             <button class="dropbtn">
               <svg
                 class="blue"
@@ -43,35 +62,38 @@
               </svg>
             </button>
           </div>-->
+       <a href="./index.html">
+<div class="button" >Log out</div>  </a>     
+         
         </div>
       </div>
-      <div class="rec1">
-        <h3 class="black large">Challenges</h3>
-      </div>
+      <a href="./month.html">
+        <div class="rec1" style="background-color: #4796ff">
+          <h3 class="black large">1 Month Challenge</h3>
+        </div>
+      </a>
       <div class="centerhp">
         <h3 class="black centerhp mid">Helpful Health Tips</h3>
 
         <div class="flex-container">
-          <div class="tp tip1">
-            <img src="./imgs/smoothie.jpeg" />
-            <div>YEsssir</div>
-            <!-- <div class="text">Lmaoo dfkm bro</div> -->
-          </div>
-          <div class="tp tip2">
-            <img src="./imgs/keto.jpeg" alt="" srcset="" />
-          </div>
-          <div class="tp tip3">
-            <img src="./imgs/foodandtime.jpeg" alt="" srcset="" />
-          </div>
-          <div class="tp tip4">
-            <img src="./imgs/grocerystore.jpeg" alt="" srcset="" />
-          </div>
-        </div>
-      </div>
+          <a href="./smoothie.html">
+            <div class="tp tip1">
+              <img src="./imgs/smoothie.jpeg" />
+            </div>
+          </a>
 
-      <div class="fthp">
-        <h3 class="black ch">Need help getting stuff done?</h3>
-        <div class="goals"></div>
+          <a href="./keto.html">
+            <div class="tp tip2">
+              <img src="./imgs/keto.jpeg" alt="" srcset="" />
+            </div>
+          </a>
+
+          <a href="./time.html">
+            <div class="tp tip3">
+              <img src="./imgs/foodandtime.jpeg" alt="" srcset="" />
+            </div>
+          </a>
+        </div>
       </div>
     </div>
 

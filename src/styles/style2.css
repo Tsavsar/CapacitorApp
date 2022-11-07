@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
 html,
 body {
   height: 100%;
@@ -246,6 +254,22 @@ h2 {
 
 .dblue {
   color: #102f9c;
+}
+
+.button{
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  color: white;
+  background-color: #0011ff;
+  border: none;
+  border-radius: 5px;
+  margin-left: auto;
+  float: right;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 /* .tp {

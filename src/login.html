@@ -16,8 +16,29 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="./styles/style.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
-  <body>
+  <body
+    x-data="{
+    username: '',
+    password: '',
+    login() {
+      const fieldsEmpty = !this.username.trim() && !this.password.trim();
+      if (fieldsEmpty) return;
+  
+      const userData = {
+        username: this.username,
+        password: this.password
+      };
+
+      if (JSON.stringify(userData) === localStorage.getItem('userdata')) {          
+        const link = document.createElement('a');
+        (link.href = 'home.html');
+        (link.click());
+      }
+    }
+  }"
+  >
     <div class="logo2">
       <img src="./imgs/herologo.png" />
     </div>
@@ -25,27 +46,24 @@
     <div class="bottom-placement">
       <div class="container">
         <h2>Login</h2>
-        <form action="home.html">
+        <form @submit.prevent>
           <div class="inputwrap">
             <label>Username or Email</label>
-            <input class="details" type="" id="username" />
+            <input class="details" type="" id="username" x-model="username" />
           </div>
 
           <div class="inputwrap">
             <label>Password</label>
-            <input class="details" type="" id="Password" />
+            <input class="details" type="password" id="Password" x-model="password" />
             <p4 class="fpword, dblue">
               <b>Forgot password?</b>
             </p4>
           </div>
 
-          <button class="submit">Sign in</button>
+          <button class="submit" @click="login">Sign in</button>
 
           <div class="foot">
-            <p3
-              >Don't have an account?
-              <a href="create.html" class="blue">Sign up</a></p3
-            >
+            <p3>Don't have an account? <a href="create.html" class="blue">Sign up</a></p3>
           </div>
 
           <div>
